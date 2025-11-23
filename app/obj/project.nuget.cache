@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "RXgY0aGFxQA=",
+  "success": true,
+  "projectFilePath": "/workspaces/backend/app/app.csproj",
+  "expectedPackageFiles": [
+    "/home/vscode/.nuget/packages/microsoft.netcore.app.ref/8.0.21/microsoft.netcore.app.ref.8.0.21.nupkg.sha512",
+    "/home/vscode/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.21/microsoft.aspnetcore.app.ref.8.0.21.nupkg.sha512",
+    "/home/vscode/.nuget/packages/microsoft.netcore.app.host.linux-x64/8.0.21/microsoft.netcore.app.host.linux-x64.8.0.21.nupkg.sha512"
+  ],
+  "logs": []
+}

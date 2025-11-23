@@ -1,0 +1,38 @@
+using Foodstagram.Domain.Common;
+
+namespace Foodstagram.Domain.Activities;
+
+public sealed class Activity : EntityBase
+{
+    private Activity() { }
+
+    public Activity(
+        ActivityType type,
+        long fromUserId,
+        long toUserId,
+        long? postId = null)
+    {
+        Type = type;
+        FromUserId = fromUserId;
+        ToUserId = toUserId;
+        PostId = postId;
+    }
+
+    public ActivityType Type { get; private set; }
+
+    /// <summary>アクションを起こした側のユーザー</summary>
+    public long FromUserId { get; private set; }
+
+    /// <summary>通知の対象となるユーザー</summary>
+    public long ToUserId { get; private set; }
+
+    /// <summary>対象となった投稿ID（ない場合もある）</summary>
+    public long? PostId { get; private set; }
+}
+
+public enum ActivityType
+{
+    Like = 1,
+    Comment = 2,
+    Follow = 3
+}
