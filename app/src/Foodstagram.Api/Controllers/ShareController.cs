@@ -1,8 +1,8 @@
-// src/Foodstagram.Api/Controllers/ShareController.cs
 using Foodstagram.Api.Dtos.Common;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-// using Foodstagram.Application.Shares.GetShareSuggestions;
+using AutoMapper;
+using Foodstagram.Application.Shares.GetShareSuggestions;
 
 namespace Foodstagram.Api.Controllers;
 
@@ -11,20 +11,23 @@ namespace Foodstagram.Api.Controllers;
 public class ShareController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public ShareController(IMediator mediator)
+    public ShareController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     /// <summary>
-    /// 共有候補ユーザー一覧
+    /// 蜈ｱ譛牙呵｣懊Θ繝ｼ繧ｶ繝ｼ荳隕ｧ
     /// </summary>
     [HttpGet("suggestions")]
     public async Task<ActionResult<IEnumerable<UserSummaryDto>>> GetSuggestionsAsync(
         CancellationToken cancellationToken = default)
     {
-        // TODO: GetShareSuggestionsQuery
-        return Ok(Array.Empty<UserSummaryDto>());
+        var result = await _mediator.Send(new GetShareSuggestionsQuery(), cancellationToken);
+        var dto = _mapper.Map<IEnumerable<UserSummaryDto>>(result);
+        return Ok(dto);
     }
 }

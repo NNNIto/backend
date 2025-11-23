@@ -1,8 +1,9 @@
-// src/Foodstagram.Api/Controllers/StoryController.cs
 using Foodstagram.Api.Dtos.Feed;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-// using Foodstagram.Application.Stories.GetStories;
+using AutoMapper;
+using Foodstagram.Application.Stories.GetStories;
+using Foodstagram.Api.Dtos.Feed.Foodstagram.Api.Dtos.Feed.Foodstagram.Api.Dtos.Feed;
 
 namespace Foodstagram.Api.Controllers;
 
@@ -11,25 +12,23 @@ namespace Foodstagram.Api.Controllers;
 public class StoryController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public StoryController(IMediator mediator)
+    public StoryController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     /// <summary>
-    /// ƒXƒg[ƒŠ[ˆê——‚ğæ“¾
+    /// ã‚¹ãƒˆãƒ¼ãƒªãƒ¼ä¸€è¦§ã‚’å–å¾—
     /// </summary>
     [HttpGet]
     public async Task<ActionResult<IEnumerable<StoryDto>>> GetAsync(
         CancellationToken cancellationToken = default)
     {
-        // TODO: Application ‘w‚Ì GetStoriesQuery ‚ğŒÄ‚Ô
-        // var result = await _mediator.Send(new GetStoriesQuery(), cancellationToken);
-        // return Ok(result);
-
-        // ‚Ğ‚Æ‚Ü‚¸ƒ‚ƒbƒN
-        var mock = new List<StoryDto>();
-        return Ok(mock);
+        var result = await _mediator.Send(new GetStoriesQuery(), cancellationToken);
+        var dto = _mapper.Map<IEnumerable<StoryDto>>(result);
+        return Ok(dto);
     }
 }

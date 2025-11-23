@@ -1,9 +1,7 @@
-// src/Foodstagram.Api/Controllers/FeedController.cs
 using Foodstagram.Api.Dtos.Feed;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-// Application
 using Foodstagram.Application.Posts.GetFeed;
 
 namespace Foodstagram.Api.Controllers;
@@ -22,7 +20,7 @@ public class FeedController : ControllerBase
     }
 
     /// <summary>
-    /// Home
+    /// Homeフィード取得
     /// </summary>
     [HttpGet]
     public async Task<ActionResult<FeedResponseDto>> GetAsync(

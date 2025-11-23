@@ -1,9 +1,9 @@
-// src/Foodstagram.Api/Controllers/FollowController.cs
 using Foodstagram.Api.Dtos.Common;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-// using Foodstagram.Application.Follows.GetFollowers;
-// using Foodstagram.Application.Follows.GetFollowing;
+using AutoMapper;
+using Foodstagram.Application.Follows.GetFollowers;
+using Foodstagram.Application.Follows.GetFollowing;
 
 namespace Foodstagram.Api.Controllers;
 
@@ -12,31 +12,35 @@ namespace Foodstagram.Api.Controllers;
 public class FollowController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public FollowController(IMediator mediator)
+    public FollowController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     /// <summary>
-    /// フォロワー一覧
+    /// 繝輔か繝ｭ繝ｯ繝ｼ荳隕ｧ
     /// </summary>
     [HttpGet("followers")]
     public async Task<ActionResult<IEnumerable<UserSummaryDto>>> GetFollowersAsync(
         CancellationToken cancellationToken = default)
     {
-        // TODO
-        return Ok(Array.Empty<UserSummaryDto>());
+        var result = await _mediator.Send(new GetFollowersQuery(), cancellationToken);
+        var dto = _mapper.Map<IEnumerable<UserSummaryDto>>(result);
+        return Ok(dto);
     }
 
     /// <summary>
-    /// フォロー一覧
+    /// 繝輔か繝ｭ繝ｼ荳隕ｧ
     /// </summary>
     [HttpGet("following")]
     public async Task<ActionResult<IEnumerable<UserSummaryDto>>> GetFollowingAsync(
         CancellationToken cancellationToken = default)
     {
-        // TODO
-        return Ok(Array.Empty<UserSummaryDto>());
+        var result = await _mediator.Send(new GetFollowingQuery(), cancellationToken);
+        var dto = _mapper.Map<IEnumerable<UserSummaryDto>>(result);
+        return Ok(dto);
     }
 }

@@ -1,9 +1,9 @@
-// src/Foodstagram.Api/Controllers/PostController.cs
 using Foodstagram.Api.Dtos.Feed;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-// using Foodstagram.Application.Posts.GetPostDetail;
-// using Foodstagram.Application.Posts.ToggleLike;
+using AutoMapper;
+using Foodstagram.Application.Posts.GetPostDetail;
+using Foodstagram.Application.Posts.ToggleLike;
 
 namespace Foodstagram.Api.Controllers;
 
@@ -12,45 +12,36 @@ namespace Foodstagram.Api.Controllers;
 public class PostController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public PostController(IMediator mediator)
+    public PostController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     /// <summary>
-    /// “ŠeÚ×‚ğæ“¾
+    /// æŠ•ç¨¿è©³ç´°å–å¾—
     /// </summary>
     [HttpGet("{postId:long}")]
     public async Task<ActionResult<PostDetailDto>> GetDetailAsync(
         long postId,
         CancellationToken cancellationToken = default)
     {
-        // TODO: GetPostDetailQuery ‚ğŒÄ‚Ô
-        // var result = await _mediator.Send(new GetPostDetailQuery(postId), cancellationToken);
-        // return Ok(result);
-
-        return Ok(new PostDetailDto
-        {
-            Id = postId,
-            ImageUrl = "",
-            Caption = "",
-            LikeCount = 0,
-            CommentCount = 0,
-            IsLiked = false
-        });
+        var result = await _mediator.Send(new GetPostDetailQuery(postId), cancellationToken);
+        var dto = _mapper.Map<PostDetailDto>(result);
+        return Ok(dto);
     }
 
     /// <summary>
-    /// ‚¢‚¢‚ËƒgƒOƒ‹
+    /// ã„ã„ã­ãƒˆã‚°ãƒ«
     /// </summary>
     [HttpPost("{postId:long}/like")]
     public async Task<IActionResult> ToggleLikeAsync(
         long postId,
         CancellationToken cancellationToken = default)
     {
-        // TODO: ToggleLikeCommand ‚ğŒÄ‚Ô
-        // await _mediator.Send(new ToggleLikeCommand(postId), cancellationToken);
+        await _mediator.Send(new ToggleLikeCommand(postId), cancellationToken);
         return NoContent();
     }
 }

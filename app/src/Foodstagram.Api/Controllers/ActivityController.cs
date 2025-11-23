@@ -1,8 +1,8 @@
-// src/Foodstagram.Api/Controllers/ActivityController.cs
 using Foodstagram.Api.Dtos.Activity;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-// using Foodstagram.Application.Activities.GetActivities;
+using AutoMapper;
+using Foodstagram.Application.Activities.GetActivities;
 
 namespace Foodstagram.Api.Controllers;
 
@@ -11,20 +11,25 @@ namespace Foodstagram.Api.Controllers;
 public class ActivityController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public ActivityController(IMediator mediator)
+    public ActivityController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     /// <summary>
-    /// ÉAÉNÉeÉBÉrÉeÉBÅií ímÅjàÍóó
+    /// „Ç¢„ÇØ„ÉÜ„Ç£„Éì„ÉÜ„Ç£ÔºàÈÄöÁü•Ôºâ‰∏ÄË¶ß
     /// </summary>
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ActivityItemDto>>> GetAsync(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 30,
         CancellationToken cancellationToken = default)
     {
-        // TODO: GetActivitiesQuery
-        return Ok(Array.Empty<ActivityItemDto>());
+        var result = await _mediator.Send(new GetActivitiesQuery(page, pageSize), cancellationToken);
+        var dto = _mapper.Map<IEnumerable<ActivityItemDto>>(result);
+        return Ok(dto);
     }
 }

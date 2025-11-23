@@ -1,7 +1,6 @@
 // src/Foodstagram.Api/Config/SwaggerConfig.cs
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
 
 namespace Foodstagram.Api.Config;
 
@@ -23,7 +22,7 @@ public static class SwaggerConfig
                 Version = version
             });
 
-            // JWT 認証用の定義（あとで Auth を実装する前提）
+            // JWT
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
                 In = ParameterLocation.Header,

@@ -1,10 +1,12 @@
-// src/Foodstagram.Api/Controllers/ProfileController.cs
 using Foodstagram.Api.Dtos.Profile;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-// using Foodstagram.Application.Profiles.GetCurrentProfile;
-// using Foodstagram.Application.Profiles.GetMyPosts;
-// using Foodstagram.Application.Profiles.UpdateProfile;
+using AutoMapper;
+using Foodstagram.Application.Profiles.GetCurrentProfile;
+using Foodstagram.Application.Profiles.GetMyPosts;
+using Foodstagram.Application.Profiles.UpdateProfile;
+using Foodstagram.Api.Dtos.Profile.Foodstagram.Api.Dtos.Profile;
+using Foodstagram.Api.Dtos.Profile.Foodstagram.Api.Dtos.Profile.Foodstagram.Api.Dtos.Profile;
 
 namespace Foodstagram.Api.Controllers;
 
@@ -13,53 +15,55 @@ namespace Foodstagram.Api.Controllers;
 public class ProfileController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public ProfileController(IMediator mediator)
+    public ProfileController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     /// <summary>
-    /// ƒƒOƒCƒ“ƒ†[ƒU[‚ÌƒvƒƒtƒB[ƒ‹ƒwƒbƒ_[‚ğæ“¾
+    /// ãƒ­ã‚°ã‚¤ãƒ³ãƒ¦ãƒ¼ã‚¶ãƒ¼ã®ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ãƒ˜ãƒƒãƒ€ãƒ¼ã‚’å–å¾—
     /// </summary>
     [HttpGet("me")]
     public async Task<ActionResult<ProfileHeaderDto>> GetCurrentAsync(
         CancellationToken cancellationToken = default)
     {
-        // TODO: GetCurrentProfileQuery ‚ğŒÄ‚Ô
-        return Ok(new ProfileHeaderDto
-        {
-            UserId = 1,
-            UserName = "demo",
-            DisplayName = "Demo User",
-            Bio = "",
-            PostCount = 0,
-            FollowerCount = 0,
-            FollowingCount = 0,
-            AvatarUrl = ""
-        });
+        var result = await _mediator.Send(new GetCurrentProfileQuery(), cancellationToken);
+        var dto = _mapper.Map<ProfileHeaderDto>(result);
+        return Ok(dto);
     }
 
     /// <summary>
-    /// ©•ª‚Ì“Šeˆê——
+    /// è‡ªåˆ†ã®æŠ•ç¨¿ä¸€è¦§
     /// </summary>
     [HttpGet("me/posts")]
     public async Task<ActionResult<IEnumerable<ProfilePostDto>>> GetMyPostsAsync(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 30,
         CancellationToken cancellationToken = default)
     {
-        // TODO: GetMyPostsQuery
-        return Ok(Array.Empty<ProfilePostDto>());
+        var result = await _mediator.Send(new GetMyPostsQuery(page, pageSize), cancellationToken);
+        var dto = _mapper.Map<IEnumerable<ProfilePostDto>>(result);
+        return Ok(dto);
     }
 
     /// <summary>
-    /// ƒvƒƒtƒB[ƒ‹XV
+    /// ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«æ›´æ–°
     /// </summary>
     [HttpPut("me")]
     public async Task<IActionResult> UpdateAsync(
         [FromBody] UpdateProfileRequestDto request,
         CancellationToken cancellationToken = default)
     {
-        // TODO: UpdateProfileCommand
+        var command = new UpdateProfileCommand(
+            request.DisplayName,
+            request.Bio,
+            request.AvatarUrl
+        );
+
+        await _mediator.Send(command, cancellationToken);
         return NoContent();
     }
 }
