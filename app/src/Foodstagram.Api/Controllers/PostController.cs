@@ -1,4 +1,4 @@
-using Foodstagram.Api.Dtos.Feed;
+using Foodstagram.Api.Dtos.Posts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;

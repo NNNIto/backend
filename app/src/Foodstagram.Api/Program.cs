@@ -1,4 +1,3 @@
-﻿// src/Foodstagram.Api/Program.cs
 using Foodstagram.Api.Config;
 using Foodstagram.Api.DI;
 using Foodstagram.Api.Filters;
@@ -14,17 +13,18 @@ builder.Services.AddControllers(options =>
 })
 .ConfigureApiBehaviorOptions(options =>
 {
-    // 自動 400 を OFF にして、自前の ValidationFilter で返す
     options.SuppressModelStateInvalidFilter = true;
 });
 
-// Swagger / CORS / Auth / DI 拡張
+// configs (CORS/Swagger/Auth)
 builder.Services.AddApiConfigs(builder.Configuration);
+
+// app services (MediatR/AutoMapper/DbContext/Repos)
 builder.Services.AddApiServices(builder.Configuration);
 
 var app = builder.Build();
 
-// swagger
+// Swagger
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -36,10 +36,12 @@ app.UseApiCors();
 
 app.UseHttpsRedirection();
 
-// 認証・認可（将来 JWT を入れる前提）
+// AuthZ/AuthN
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { } // for tests

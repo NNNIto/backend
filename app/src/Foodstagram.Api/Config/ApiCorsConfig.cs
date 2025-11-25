@@ -1,4 +1,3 @@
-// src/Foodstagram.Api/Config/ApiCorsConfig.cs
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,13 +16,21 @@ public static class ApiCorsConfig
 
         services.AddCors(options =>
         {
-            options.AddPolicy(PolicyName, builder =>
+            options.AddPolicy(PolicyName, policy =>
             {
-                builder
-                    .WithOrigins(origins)
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials();
+                if (origins.Length == 0)
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                }
+                else
+                {
+                    policy.WithOrigins(origins)
+                          .AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowCredentials();
+                }
             });
         });
 
@@ -31,7 +38,5 @@ public static class ApiCorsConfig
     }
 
     public static IApplicationBuilder UseApiCors(this IApplicationBuilder app)
-    {
-        return app.UseCors(PolicyName);
-    }
+        => app.UseCors(PolicyName);
 }

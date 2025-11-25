@@ -1,4 +1,3 @@
-// src/Foodstagram.Api/Config/AuthConfig.cs
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,16 +14,21 @@ public static class AuthConfig
         var authority = section["Authority"];
         var audience = section["Audience"];
 
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
+
         if (!string.IsNullOrWhiteSpace(authority) && !string.IsNullOrWhiteSpace(audience))
         {
-            services
-                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.Authority = authority;
-                    options.Audience = audience;
-                    options.RequireHttpsMetadata = true;
-                });
+            services.AddJwtBearer(options =>
+            {
+                options.Authority = authority;
+                options.Audience = audience;
+                options.RequireHttpsMetadata = true;
+            });
+        }
+        else
+        {
+            // dev/no-auth fallback
+            services.AddJwtBearer(_ => { });
         }
 
         return services;

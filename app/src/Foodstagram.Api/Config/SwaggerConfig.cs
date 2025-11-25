@@ -1,6 +1,6 @@
-// src/Foodstagram.Api/Config/SwaggerConfig.cs
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 namespace Foodstagram.Api.Config;
 
@@ -16,36 +16,27 @@ public static class SwaggerConfig
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(c =>
         {
-            c.SwaggerDoc(version, new OpenApiInfo
-            {
-                Title = title,
-                Version = version
-            });
+            c.SwaggerDoc(version, new OpenApiInfo { Title = title, Version = version });
 
-            // JWT
-            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            // Bearer auth (optional)
+            var securityScheme = new OpenApiSecurityScheme
             {
-                In = ParameterLocation.Header,
                 Name = "Authorization",
+                Description = "Enter 'Bearer {token}'",
+                In = ParameterLocation.Header,
                 Type = SecuritySchemeType.Http,
                 Scheme = "bearer",
                 BearerFormat = "JWT",
-                Description = "Enter 'Bearer {token}'"
-            });
-
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            };
+            c.AddSecurityDefinition("Bearer", securityScheme);
             c.AddSecurityRequirement(new OpenApiSecurityRequirement
             {
-                {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                    },
-                    Array.Empty<string>()
-                }
+                { securityScheme, Array.Empty<string>() }
             });
         });
 
