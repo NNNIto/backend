@@ -1,9 +1,9 @@
+using AutoMapper;
 using Foodstagram.Api.Dtos.Feed;
+using Foodstagram.Application.Stories.GetStories;
+using Foodstagram.Application.Stories.GetStoryDetail;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
-using Foodstagram.Application.Stories.GetStories;
-using Foodstagram.Api.Dtos.Feed.Foodstagram.Api.Dtos.Feed.Foodstagram.Api.Dtos.Feed;
 
 namespace Foodstagram.Api.Controllers;
 
@@ -29,6 +29,19 @@ public class StoryController : ControllerBase
     {
         var result = await _mediator.Send(new GetStoriesQuery(), cancellationToken);
         var dto = _mapper.Map<IEnumerable<StoryDto>>(result);
+        return Ok(dto);
+    }
+
+    /// <summary>
+    /// ストーリー詳細を取得
+    /// </summary>
+    [HttpGet("{storyId:long}")]
+    public async Task<ActionResult<StoryDetailDto>> GetDetailAsync(
+        long storyId,
+        CancellationToken cancellationToken = default)
+    {
+        var result = await _mediator.Send(new GetStoryDetailQuery(storyId), cancellationToken);
+        var dto = _mapper.Map<StoryDetailDto>(result);
         return Ok(dto);
     }
 }
