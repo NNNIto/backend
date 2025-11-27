@@ -1,28 +1,28 @@
-using System;
-using System.Collections.Generic;
-
+// src/Foodstagram.Api/Dtos/Posts/PostDetailDto.cs
 namespace Foodstagram.Api.Dtos.Posts;
-
-public sealed class CommentDto
-{
-    public long Id { get; init; }
-    public long UserId { get; init; }
-    public string UserName { get; init; } = string.Empty;
-    public string Text { get; init; } = string.Empty;
-    public DateTimeOffset CreatedAt { get; init; }
-}
 
 public sealed class PostDetailDto
 {
-    public long Id { get; init; }
-    public long AuthorId { get; init; }
-    public string AuthorName { get; init; } = string.Empty;
-    public string AuthorAvatarUrl { get; init; } = string.Empty;
-    public string ImageUrl { get; init; } = string.Empty;
-    public string Caption { get; init; } = string.Empty;
-    public int LikeCount { get; init; }
-    public int CommentCount { get; init; }
-    public bool IsLiked { get; init; }
-    public DateTimeOffset CreatedAt { get; init; }
-    public IReadOnlyList<CommentDto> Comments { get; init; } = Array.Empty<CommentDto>();
+    public long Id { get; set; }
+
+    public string ImageUrl { get; set; } = string.Empty;
+
+    public string Caption { get; set; } = string.Empty;
+
+    public int LikeCount { get; set; }
+
+    public bool IsLiked { get; set; }
+
+    public int CommentCount { get; set; }
+
+    public DateTime CreatedAt { get; set; }
+
+    /// <summary>投稿者名</summary>
+    public string AuthorName { get; set; } = string.Empty;
+
+    /// <summary>投稿者のアイコン URL</summary>
+    public string AuthorAvatarUrl { get; set; } = string.Empty;
+
+    /// <summary>コメント一覧</summary>
+    public IReadOnlyList<CommentDto> Comments { get; set; } = new List<CommentDto>();
 }
