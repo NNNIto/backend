@@ -20,13 +20,13 @@ public sealed class Activity : EntityBase
 
     public ActivityType Type { get; private set; }
 
-    /// <summary>アクションを起こした側のユーザー</summary>
+    
     public long FromUserId { get; private set; }
 
-    /// <summary>通知の対象となるユーザー</summary>
+    
     public long ToUserId { get; private set; }
 
-    /// <summary>対象となった投稿ID（ない場合もある）</summary>
+    
     public long? PostId { get; private set; }
 }
 

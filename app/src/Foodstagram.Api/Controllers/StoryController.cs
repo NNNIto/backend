@@ -20,9 +20,9 @@ public class StoryController : ControllerBase
         _mapper = mapper;
     }
 
-    /// <summary>
-    /// ストーリー一覧を取得
-    /// </summary>
+    
+    
+    
     [HttpGet]
     public async Task<ActionResult<IEnumerable<StoryDto>>> GetAsync(
         CancellationToken cancellationToken = default)
@@ -32,9 +32,9 @@ public class StoryController : ControllerBase
         return Ok(dto);
     }
 
-    /// <summary>
-    /// ストーリー詳細を取得
-    /// </summary>
+    
+    
+    
     [HttpGet("{storyId:long}")]
     public async Task<ActionResult<StoryDetailDto>> GetDetailAsync(
         long storyId,

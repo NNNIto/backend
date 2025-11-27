@@ -20,9 +20,9 @@ public class FollowController : ControllerBase
         _mapper = mapper;
     }
 
-    /// <summary>
-    /// フォロワー一覧
-    /// </summary>
+    
+    
+    
     [HttpGet("followers")]
     public async Task<ActionResult<IEnumerable<UserSummaryDto>>> GetFollowersAsync(
         CancellationToken cancellationToken = default)
@@ -32,9 +32,9 @@ public class FollowController : ControllerBase
         return Ok(dto);
     }
 
-    /// <summary>
-    /// フォロー一覧
-    /// </summary>
+    
+    
+    
     [HttpGet("following")]
     public async Task<ActionResult<IEnumerable<UserSummaryDto>>> GetFollowingAsync(
         CancellationToken cancellationToken = default)

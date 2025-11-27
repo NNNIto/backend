@@ -17,22 +17,22 @@ public static class ApiServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        // MediatR
+        
         var applicationAssembly = Assembly.Load("Foodstagram.Application");
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(applicationAssembly));
+        services.AddMediatR(applicationAssembly);
 
-        // AutoMapper
+        
         services.AddAutoMapper(cfg => cfg.AddProfile<ApiMappingProfile>());
 
-        // HttpContext
+        
         services.AddHttpContextAccessor();
 
-        // DbContext
+        
         var cs = configuration.GetConnectionString("Default");
         services.AddDbContext<FoodstagramDbContext>(opt =>
             opt.UseSqlServer(cs));
 
-        // Repositories
+        
         services.AddScoped<IPostRepository, PostRepository>();
         services.AddScoped<IStoryRepository, StoryRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
@@ -40,7 +40,7 @@ public static class ApiServiceCollectionExtensions
         services.AddScoped<IFollowRepository, FollowRepository>();
         services.AddScoped<IShareRepository, ShareRepository>();
 
-        // Current user
+        
         services.AddScoped<ICurrentUserService, AuthUserProvider>();
 
         return services;

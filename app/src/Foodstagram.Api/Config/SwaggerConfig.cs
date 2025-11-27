@@ -18,7 +18,7 @@ public static class SwaggerConfig
         {
             c.SwaggerDoc(version, new OpenApiInfo { Title = title, Version = version });
 
-            // Bearer auth (optional)
+            
             var securityScheme = new OpenApiSecurityScheme
             {
                 Name = "Authorization",

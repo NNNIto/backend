@@ -4,10 +4,10 @@ using Microsoft.Extensions.Logging;
 
 namespace Foodstagram.BackgroundJobs;
 
-/// <summary>
-/// 24時間経ったストーリーを削除するバッチジョブ。
-/// Instagram と同様に、期限切れのストーリーを掃除して DB をクリーンに保つ。
-/// </summary>
+
+
+
+
 public sealed class StoryCleanupJob
 {
     private readonly FoodstagramDbContext _db;
@@ -27,14 +27,14 @@ public sealed class StoryCleanupJob
 
         var now = DateTimeOffset.UtcNow;
 
-        // ――― 期限切れストーリーを全て取得 ―――
+        
         var expiredStories = await _db.Stories
             .Where(s => s.ExpiresAt <= now)
             .ToListAsync(ct);
 
         if (expiredStories.Count > 0)
         {
-            // 閲覧履歴（StoryViews）も cascade delete で削除される
+            
             _db.Stories.RemoveRange(expiredStories);
             await _db.SaveChangesAsync(ct);
 

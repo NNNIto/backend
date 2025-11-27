@@ -1,4 +1,4 @@
-// src/Foodstagram.Application/Stories/GetStories/GetStoriesHandler.cs
+
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,9 +8,9 @@ using MediatR;
 
 namespace Foodstagram.Application.Stories.GetStories;
 
-/// <summary>
-/// ストーリー一覧取得のハンドラ。
-/// </summary>
+
+
+
 public sealed class GetStoriesHandler
     : IRequestHandler<GetStoriesQuery, IReadOnlyList<StorySummaryModel>>
 {
@@ -29,7 +29,7 @@ public sealed class GetStoriesHandler
         GetStoriesQuery request,
         CancellationToken cancellationToken)
     {
-        // 「誰のストーリーを未読扱いにするか」などにログインユーザーIDが必要になる想定
+        
         var userId = _currentUser.UserId;
 
         var stories = await _storyRepository.GetStoriesAsync(

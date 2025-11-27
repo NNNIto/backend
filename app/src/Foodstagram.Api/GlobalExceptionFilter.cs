@@ -1,4 +1,4 @@
-// src/Foodstagram.Api/Filters/GlobalExceptionFilter.cs
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
@@ -22,7 +22,7 @@ public sealed class GlobalExceptionFilter : IExceptionFilter
         {
             Status = StatusCodes.Status500InternalServerError,
             Title = "An unexpected error occurred.",
-            Detail = context.Exception.Message // ñ{î‘ÇÕîÒï\é¶êÑèß
+            Detail = context.Exception.Message 
         };
 
         context.Result = new ObjectResult(problemDetails)

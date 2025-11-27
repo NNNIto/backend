@@ -6,7 +6,7 @@ public sealed class StoryDetailDto
     public long UserId { get; init; }
     public string UserName { get; init; } = string.Empty;
     public string AvatarUrl { get; init; } = string.Empty;
-    public string ImageUrl { get; init; } = string.Empty; // MediaUrl in backend
+    public string ImageUrl { get; init; } = string.Empty; 
     public bool IsViewed { get; init; }
     public DateTimeOffset CreatedAt { get; init; }
     public DateTimeOffset ExpiresAt { get; init; }

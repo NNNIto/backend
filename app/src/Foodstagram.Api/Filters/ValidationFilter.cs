@@ -1,4 +1,4 @@
-// src/Foodstagram.Api/Filters/ValidationFilter.cs
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -22,6 +22,6 @@ public sealed class ValidationFilter : IActionFilter
 
 	public void OnActionExecuted(ActionExecutedContext context)
 	{
-		// ‰½‚à‚µ‚È‚¢
+		
 	}
 }

@@ -27,7 +27,7 @@ public static class AuthConfig
         }
         else
         {
-            // dev/no-auth fallback
+            
             services.AddJwtBearer(_ => { });
         }
 

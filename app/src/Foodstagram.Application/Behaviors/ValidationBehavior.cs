@@ -14,7 +14,7 @@ public sealed class ValidationBehavior<TRequest, TResponse>
         RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
-        // FluentValidation ‚È‚Ç“±“üŽž‚ÉŽg‚¤
+        
         return await next();
     }
 }

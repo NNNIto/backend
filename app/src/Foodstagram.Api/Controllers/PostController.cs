@@ -20,9 +20,9 @@ public class PostController : ControllerBase
         _mapper = mapper;
     }
 
-    /// <summary>
-    /// 投稿詳細取得
-    /// </summary>
+    
+    
+    
     [HttpGet("{postId:long}")]
     public async Task<ActionResult<PostDetailDto>> GetDetailAsync(
         long postId,
@@ -33,9 +33,9 @@ public class PostController : ControllerBase
         return Ok(dto);
     }
 
-    /// <summary>
-    /// いいねトグル
-    /// </summary>
+    
+    
+    
     [HttpPost("{postId:long}/like")]
     public async Task<IActionResult> ToggleLikeAsync(
         long postId,

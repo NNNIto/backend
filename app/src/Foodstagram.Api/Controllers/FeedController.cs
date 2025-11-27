@@ -19,9 +19,9 @@ public class FeedController : ControllerBase
         _mapper = mapper;
     }
 
-    /// <summary>
-    /// Homeフィード取得
-    /// </summary>
+    
+    
+    
     [HttpGet]
     public async Task<ActionResult<FeedResponseDto>> GetAsync(
         [FromQuery] int page = 1,

@@ -31,8 +31,8 @@ public sealed class PostRepository : IPostRepository
             .Select(p => new PostSummaryModel(
                 p.Id,
                 p.AuthorId,
-                "", // UserName ‚Í JOIN ‚ÅŠg’£‰Â”\
-                "", // AvatarUrl
+                "", 
+                "", 
                 p.ImageUrl,
                 p.Caption,
                 p.Likes.Count,

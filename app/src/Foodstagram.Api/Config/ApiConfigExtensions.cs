@@ -1,4 +1,4 @@
-// src/Foodstagram.Api/Config/ApiConfigExtensions.cs
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

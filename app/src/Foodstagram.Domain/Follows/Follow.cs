@@ -17,10 +17,10 @@ public sealed class Follow : EntityBase
         FolloweeId = followeeId;
     }
 
-    /// <summary>フォローする側（自分）</summary>
+    
     public long FollowerId { get; private set; }
 
-    /// <summary>フォローされる側（相手）</summary>
+    
     public long FolloweeId { get; private set; }
 
     public static Follow Create(long followerId, long followeeId)

@@ -18,7 +18,7 @@ public sealed class AuthUserProvider : ICurrentUserService
         {
             var user = _httpContextAccessor.HttpContext?.User;
             var sub = user?.FindFirst("sub")?.Value;
-            return long.TryParse(sub, out var id) ? id : 1; // dev fallback
+            return long.TryParse(sub, out var id) ? id : 1; 
         }
     }
 }

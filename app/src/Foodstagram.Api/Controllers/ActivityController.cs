@@ -19,9 +19,9 @@ public class ActivityController : ControllerBase
         _mapper = mapper;
     }
 
-    /// <summary>
-    /// アクティビティ（通知）一覧
-    /// </summary>
+    
+    
+    
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ActivityItemDto>>> GetAsync(
         [FromQuery] int page = 1,

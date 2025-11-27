@@ -23,9 +23,9 @@ public class ProfileController : ControllerBase
         _mapper = mapper;
     }
 
-    /// <summary>
-    /// ログインユーザーのプロフィールヘッダーを取得
-    /// </summary>
+    
+    
+    
     [HttpGet("me")]
     public async Task<ActionResult<ProfileHeaderDto>> GetCurrentAsync(
         CancellationToken cancellationToken = default)
@@ -35,9 +35,9 @@ public class ProfileController : ControllerBase
         return Ok(dto);
     }
 
-    /// <summary>
-    /// 自分の投稿一覧
-    /// </summary>
+    
+    
+    
     [HttpGet("me/posts")]
     public async Task<ActionResult<IEnumerable<ProfilePostDto>>> GetMyPostsAsync(
         [FromQuery] int page = 1,
@@ -49,9 +49,9 @@ public class ProfileController : ControllerBase
         return Ok(dto);
     }
 
-    /// <summary>
-    /// プロフィール更新
-    /// </summary>
+    
+    
+    
     [HttpPut("me")]
     public async Task<IActionResult> UpdateAsync(
         [FromBody] UpdateProfileRequestDto request,

@@ -17,27 +17,27 @@ public sealed class ApiMappingProfile : Profile
 {
     public ApiMappingProfile()
     {
-        // Feed
+        
         CreateMap<FeedItemResult, FeedItemDto>();
         CreateMap<GetFeedResult, FeedResponseDto>();
 
-        // Post detail
+        
         CreateMap<CommentResult, CommentDto>();
         CreateMap<PostDetailResult, PostDetailDto>();
 
-        // Stories
+        
         CreateMap<StorySummaryModel, StoryDto>();
         CreateMap<Foodstagram.Application.Stories.GetStoryDetail.StoryDetailResult, StoryDetailDto>()
             .ForMember(d => d.ImageUrl, opt => opt.MapFrom(s => s.MediaUrl));
 
-        // Profile
+        
         CreateMap<ProfileHeaderModel, ProfileHeaderDto>();
         CreateMap<MyPostModel, MyPostDto>();
 
-        // Activity
+        
         CreateMap<ActivityItemModel, Api.Dtos.Activity.ActivityItemDto>();
 
-        // Common
+        
         CreateMap<UserSummaryModel, UserSummaryDto>();
     }
 }

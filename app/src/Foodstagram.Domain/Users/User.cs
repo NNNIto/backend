@@ -37,7 +37,7 @@ public sealed class User : AggregateRoot
         Touch();
     }
 
-    // ナビゲーション用の内部ヘルパ（実際の追加は Follow 側で制御する想定）
+    
     internal void AddPost(Post post)
     {
         _posts.Add(post);

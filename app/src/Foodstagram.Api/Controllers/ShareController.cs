@@ -19,9 +19,9 @@ public class ShareController : ControllerBase
         _mapper = mapper;
     }
 
-    /// <summary>
-    /// 共有候補ユーザー一覧
-    /// </summary>
+    
+    
+    
     [HttpGet("suggestions")]
     public async Task<ActionResult<IEnumerable<UserSummaryDto>>> GetSuggestionsAsync(
         CancellationToken cancellationToken = default)
