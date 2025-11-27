@@ -1,4 +1,5 @@
 using MediatR;
+using Foodstagram.Application.Common.Models;
 
 namespace Foodstagram.Application.Follows.GetFollowing;
 

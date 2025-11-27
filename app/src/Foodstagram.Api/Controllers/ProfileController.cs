@@ -5,8 +5,6 @@ using AutoMapper;
 using Foodstagram.Application.Profiles.GetCurrentProfile;
 using Foodstagram.Application.Profiles.GetMyPosts;
 using Foodstagram.Application.Profiles.UpdateProfile;
-using Foodstagram.Api.Dtos.Profile.Foodstagram.Api.Dtos.Profile;
-using Foodstagram.Api.Dtos.Profile.Foodstagram.Api.Dtos.Profile.Foodstagram.Api.Dtos.Profile;
 
 namespace Foodstagram.Api.Controllers;
 

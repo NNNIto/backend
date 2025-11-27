@@ -1,21 +1,13 @@
-
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Foodstagram.Application.Common.Models;
+using Foodstagram.Application.Activities.GetActivities;
 
 namespace Foodstagram.Application.Common.Interfaces;
 
-
-
-
-
 public interface IActivityRepository
 {
-    
-    
-    
-    Task<IReadOnlyList<ActivityModel>> GetActivitiesAsync(
+    Task<IReadOnlyList<ActivityItemModel>> GetActivitiesAsync(
         long userId,
         CancellationToken cancellationToken);
 }
