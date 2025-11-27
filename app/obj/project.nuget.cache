@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "vHvFWC2xzxs=",
+  "dgSpecHash": "AXVPtZzd6z8=",
   "success": true,
   "projectFilePath": "/workspaces/backend/app/app.csproj",
   "expectedPackageFiles": [
@@ -10,7 +10,6 @@
     "/home/vscode/.nuget/packages/azure.identity/1.11.4/azure.identity.1.11.4.nupkg.sha512",
     "/home/vscode/.nuget/packages/mediatr/12.0.0/mediatr.12.0.0.nupkg.sha512",
     "/home/vscode/.nuget/packages/mediatr.contracts/2.0.0/mediatr.contracts.2.0.0.nupkg.sha512",
-    "/home/vscode/.nuget/packages/mediatr.extensions.microsoft.dependencyinjection/11.1.0/mediatr.extensions.microsoft.dependencyinjection.11.1.0.nupkg.sha512",
     "/home/vscode/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/8.0.11/microsoft.aspnetcore.authentication.jwtbearer.8.0.11.nupkg.sha512",
     "/home/vscode/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "/home/vscode/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
@@ -71,30 +70,5 @@
     "/home/vscode/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.21/microsoft.aspnetcore.app.ref.8.0.21.nupkg.sha512",
     "/home/vscode/.nuget/packages/microsoft.netcore.app.host.linux-x64/8.0.21/microsoft.netcore.app.host.linux-x64.8.0.21.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "message": "app depends on MediatR (>= 11.1.1) but MediatR 11.1.1 was not found. MediatR 12.0.0 was resolved instead.",
-      "projectPath": "/workspaces/backend/app/app.csproj",
-      "warningLevel": 1,
-      "filePath": "/workspaces/backend/app/app.csproj",
-      "libraryId": "MediatR",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    },
-    {
-      "code": "NU1608",
-      "level": "Warning",
-      "message": "Detected package version outside of dependency constraint: MediatR.Extensions.Microsoft.DependencyInjection 11.1.0 requires MediatR (>= 11.0.0 && < 12.0.0) but version MediatR 12.0.0 was resolved.",
-      "projectPath": "/workspaces/backend/app/app.csproj",
-      "warningLevel": 1,
-      "filePath": "/workspaces/backend/app/app.csproj",
-      "libraryId": "MediatR",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  "logs": []
 }
