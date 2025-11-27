@@ -12,3 +12,10 @@ public sealed class ProfileHeaderDto
     public int FollowerCount { get; init; }
     public int FollowingCount { get; init; }
 }
+
+public sealed class UpdateProfileRequestDto
+{
+    public string DisplayName { get; init; } = string.Empty;
+    public string Bio { get; init; } = string.Empty;
+    public string AvatarUrl { get; init; } = string.Empty;
+}
