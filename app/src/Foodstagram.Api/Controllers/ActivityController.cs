@@ -28,7 +28,7 @@ public class ActivityController : ControllerBase
         [FromQuery] int pageSize = 30,
         CancellationToken cancellationToken = default)
     {
-        var result = await _mediator.Send(new GetActivitiesQuery(page, pageSize), cancellationToken);
+        var result = await _mediator.Send(new GetActivitiesQuery(), cancellationToken);
         var dto = _mapper.Map<IEnumerable<ActivityItemDto>>(result);
         return Ok(dto);
     }

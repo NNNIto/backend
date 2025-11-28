@@ -14,11 +14,11 @@ public static class AuthConfig
         var authority = section["Authority"];
         var audience = section["Audience"];
 
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
+        var authenticationBuilder = services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
 
         if (!string.IsNullOrWhiteSpace(authority) && !string.IsNullOrWhiteSpace(audience))
         {
-            services.AddJwtBearer(options =>
+            authenticationBuilder.AddJwtBearer(options =>
             {
                 options.Authority = authority;
                 options.Audience = audience;
@@ -28,7 +28,7 @@ public static class AuthConfig
         else
         {
             
-            services.AddJwtBearer(_ => { });
+            authenticationBuilder.AddJwtBearer(_ => { });
         }
 
         return services;

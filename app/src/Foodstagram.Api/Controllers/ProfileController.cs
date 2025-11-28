@@ -42,7 +42,7 @@ public class ProfileController : ControllerBase
         [FromQuery] int pageSize = 30,
         CancellationToken cancellationToken = default)
     {
-        var result = await _mediator.Send(new GetMyPostsQuery(page, pageSize), cancellationToken);
+        var result = await _mediator.Send(new GetMyPostsQuery(page), cancellationToken);
         var dto = _mapper.Map<IEnumerable<ProfilePostDto>>(result);
         return Ok(dto);
     }
