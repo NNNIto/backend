@@ -14,7 +14,7 @@ public sealed class ShareRepository : IShareRepository
         _db = db;
     }
 
-    public async Task<IReadOnlyList<UserSummaryModel>> GetShareSuggestionsAsync(long userId, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<Foodstagram.Application.Shares.GetShareSuggestions.ShareSuggestionModel>> GetShareSuggestionsAsync(long userId, CancellationToken cancellationToken)
     {
         var followedIds = await _db.Follows
             .Where(f => f.FollowerId == userId)
@@ -25,7 +25,7 @@ public sealed class ShareRepository : IShareRepository
             .Where(u => u.Id != userId && !followedIds.Contains(u.Id))
             .OrderByDescending(u => u.CreatedAt)
             .Take(20)
-            .Select(u => new UserSummaryModel(u.Id, u.UserName, u.DisplayName, u.AvatarUrl))
+            .Select(u => new Foodstagram.Application.Shares.GetShareSuggestions.ShareSuggestionModel(u.Id, u.UserName, u.DisplayName, u.AvatarUrl ?? string.Empty))
             .ToListAsync(cancellationToken);
     }
 }

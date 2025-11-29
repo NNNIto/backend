@@ -17,8 +17,6 @@
     <PackageReference Include="Microsoft.OpenApi" Version="1.6.22" />
   </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.6" />
-    </ItemGroup>
+    <!-- Database provider: using SQL Server package already included. If you want MySQL, add Pomelo (compat version) and adjust packages. -->
 
 </Project>

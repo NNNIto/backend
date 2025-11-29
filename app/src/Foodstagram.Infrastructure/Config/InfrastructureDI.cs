@@ -18,7 +18,9 @@ public static class InfrastructureDI
 
         services.AddDbContext<FoodstagramDbContext>(options =>
         {
-            options.UseMySql(conn, ServerVersion.AutoDetect(conn));
+                // Use SQL Server provider (SQL Server package is referenced in app.csproj).
+                // If you want to use MySQL, switch package references accordingly.
+                options.UseSqlServer(conn);
         });
 
         services.AddScoped<IPostRepository, PostRepository>();
