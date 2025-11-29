@@ -23,7 +23,7 @@ public sealed class FollowRepository : IFollowRepository
 
         return await _db.Users
             .Where(u => followerIds.Contains(u.Id))
-            .Select(u => new UserSummaryModel(u.Id, u.UserName, u.DisplayName, u.AvatarUrl))
+            .Select(u => new UserSummaryModel(u.Id, u.UserName, u.DisplayName, u.AvatarUrl ?? string.Empty))
             .ToListAsync(cancellationToken);
     }
 
@@ -36,7 +36,7 @@ public sealed class FollowRepository : IFollowRepository
 
         return await _db.Users
             .Where(u => followeeIds.Contains(u.Id))
-            .Select(u => new UserSummaryModel(u.Id, u.UserName, u.DisplayName, u.AvatarUrl))
+            .Select(u => new UserSummaryModel(u.Id, u.UserName, u.DisplayName, u.AvatarUrl ?? string.Empty))
             .ToListAsync(cancellationToken);
     }
 }
