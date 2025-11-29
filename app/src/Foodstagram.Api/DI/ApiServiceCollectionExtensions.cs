@@ -17,7 +17,8 @@ public static class ApiServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        var applicationAssembly = Assembly.Load("Foodstagram.Application");
+        // If the application is a single project, the handlers are in the entry assembly.
+        var applicationAssembly = Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly();
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(applicationAssembly));
 
         services.AddAutoMapper(cfg => cfg.AddProfile<ApiMappingProfile>());

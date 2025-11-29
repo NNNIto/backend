@@ -18,7 +18,15 @@ public static class InfrastructureDI
 
         services.AddDbContext<FoodstagramDbContext>(options =>
         {
-            options.UseMySql(conn, ServerVersion.AutoDetect(conn));
+            if (!string.IsNullOrWhiteSpace(conn))
+            {
+                options.UseSqlServer(conn);
+            }
+            else
+            {
+                // Fallback to in-memory DB for development if no connection string is provided
+                options.UseInMemoryDatabase("FoodstagramDevDb");
+            }
         });
 
         services.AddScoped<IPostRepository, PostRepository>();

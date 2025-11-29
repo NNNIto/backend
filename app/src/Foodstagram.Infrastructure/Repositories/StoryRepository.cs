@@ -28,4 +28,26 @@ public sealed class StoryRepository : IStoryRepository
             ))
             .ToListAsync(ct);
     }
+
+    public async Task<StoryDetailModel> GetStoryDetailAsync(long storyId, long viewerUserId, CancellationToken cancellationToken)
+    {
+        var q = await _db.Stories
+            .Where(s => s.Id == storyId)
+            .Include(s => s.Views)
+            .Join(_db.Users, s => s.UserId, u => u.Id, (s, u) => new { s, u })
+            .Select(x => new StoryDetailModel(
+                x.s.Id,
+                x.s.UserId,
+                x.u.UserName,
+                x.u.AvatarUrl ?? string.Empty,
+                x.s.ImageUrl ?? string.Empty,
+                /* MediaType */ string.Empty,
+                x.s.Views.Any(v => v.ViewerUserId == viewerUserId),
+                x.s.CreatedAt,
+                x.s.ExpiresAt
+            ))
+            .FirstOrDefaultAsync(cancellationToken);
+
+        return q!;
+    }
 }

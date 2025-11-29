@@ -14,7 +14,7 @@ public interface IShareRepository
     
     
     
-    Task<IReadOnlyList<UserSummaryModel>> GetShareSuggestionsAsync(
-        long userId,
+    Task<IReadOnlyList<Foodstagram.Application.Shares.GetShareSuggestions.ShareSuggestionModel>> GetShareSuggestionsAsync(
+                                                       long userId,
         CancellationToken cancellationToken);
 }

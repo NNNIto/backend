@@ -17,6 +17,7 @@ public sealed class GetShareSuggestionsHandler
 
     public async Task<IReadOnlyList<ShareSuggestionModel>> Handle(GetShareSuggestionsQuery request, CancellationToken cancellationToken)
     {
-        return await _repository.GetSuggestionsAsync(_currentUser.UserId, cancellationToken);
+        return await _repository.GetShareSuggestionsAsync(
+            _currentUser.UserId, cancellationToken);
     }
 }
